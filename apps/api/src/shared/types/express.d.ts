@@ -1,3 +1,10 @@
-import type { Express } from "express";
+import type { UserDocument } from "@/modules/auth/user.model";
 
-export type App = Express;
+declare global {
+  namespace Express {
+    interface Request {
+      user: UserDocument;
+    }
+  }
+}
+export {};

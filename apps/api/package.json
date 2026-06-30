@@ -2,7 +2,7 @@
   "name": "reliability-command-center-api",
   "version": "1.0.0",
   "private": true,
-   "main": "dist/server.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
@@ -11,6 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@incident/types": "*",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.6",
     "dotenv": "^16.6.1",
