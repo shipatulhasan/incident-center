@@ -1,0 +1,291 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+
+@custom-variant dark (&:is(.dark *));
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* futura-pt matches Adobe Fonts (Typekit); load kit via VITE_ADOBE_FONTS_KIT or index.html */
+  --font-sans:
+    'futura-pt', 'Futura PT', 'Futura PT Book', Futura, system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+  --font-proxima: var(--font-sans);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-vibrant: var(--secondary-vibrant);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-surface-soft: var(--surface-soft);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  /* --color-input: var(--input); */
+  /* --color-ring: var(--ring); */
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* User's custom colors */
+  --color-brand: var(--brand);
+  --color-success: hsl(var(--success));
+
+  /* Animations from old tailwind.config.js */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border, currentColor);
+  }
+}
+
+/*
+  WebKit autofill ignores background-color. Inset box-shadow simulates the field
+  background; long transition delays Chrome reverting fills.
+  - app-input-autofill: follows :root / .dark CSS variables (settings forms, etc.)
+  - app-input-autofill-dark: always dark (auth login inputs)
+*/
+@layer components {
+  .app-input-autofill:-webkit-autofill,
+  .app-input-autofill:-webkit-autofill:hover,
+  .app-input-autofill:-webkit-autofill:focus,
+  .app-input-autofill:-webkit-autofill:active,
+  .app-input-autofill:-webkit-autofill:focus-visible {
+    background-image: none !important;
+    -webkit-text-fill-color: var(--autofill-text) !important;
+    color: var(--autofill-text) !important;
+    caret-color: var(--autofill-text);
+    -webkit-box-shadow: inset 0 0 0 1000px var(--autofill-bg) !important;
+    box-shadow: inset 0 0 0 1000px var(--autofill-bg) !important;
+    transition: background-color 9999s ease-in-out 0s !important;
+  }
+
+  .app-input-autofill-dark:-webkit-autofill,
+  .app-input-autofill-dark:-webkit-autofill:hover,
+  .app-input-autofill-dark:-webkit-autofill:focus,
+  .app-input-autofill-dark:-webkit-autofill:active,
+  .app-input-autofill-dark:-webkit-autofill:focus-visible {
+    background-image: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    caret-color: #ffffff;
+    -webkit-box-shadow: inset 0 0 0 1000px #020617 !important;
+    box-shadow: inset 0 0 0 1000px #020617 !important;
+    transition: background-color 9999s ease-in-out 0s !important;
+  }
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #020617;
+    --card: #ffffff;
+    --card-foreground: #020617;
+    --popover: #3db6cd1a;
+    --primary: #0f172a;
+    --primary-foreground: #f8fafc;
+    --secondary: #78788029;
+    --secondary-foreground: #0f172a;
+    --secondary-vibrant: #727272;
+    --muted: #088ea7;
+    --muted-foreground: #08768b;
+    --accent: #ff2d8d;
+    --accent-foreground: #0f172a;
+    --destructive: #d60053;
+    --destructive-foreground: #f8fafc;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #78e0f4;
+    --chart-1: #e11d48;
+    --chart-2: #14b8a6;
+    --chart-3: #0369a1;
+    --chart-4: #f59e0b;
+    --chart-5: #f97316;
+    --radius: 0.5rem;
+    --sidebar-background: #f8fafc;
+    --sidebar-foreground: #344a63;
+    --sidebar-primary: #0f172a;
+    --sidebar-primary-foreground: #f8fafc;
+    --sidebar-accent: #f1f5f9;
+    --sidebar-accent-foreground: #0f172a;
+    --sidebar-border: #e2e8f0;
+    --sidebar-ring: #94a3b8;
+
+    /* User specific colors */
+    --brand: #d60053;
+    --surface-soft: #f2f2f7;
+    --success: 142 71% 45%;
+    --autofill-bg: #ffffff;
+    --autofill-text: #262626;
+
+    --test-drive-radial: radial-gradient(
+      102.63% 323.26% at 102.63% 100.06%,
+      #c9adff 0%,
+      #5221b5 49.5%,
+      #412972 100%
+    );
+    --test-drive-radial-2: radial-gradient(
+      119.47% 387.26% at 119.47% 81.94%,
+      #fc6232 0%,
+      #ae1b1e 22.99%,
+      #1a2766 100%
+    );
+  }
+
+  .dark {
+    --background: #020617;
+    --foreground: #f8fafc;
+    --card: #020617;
+    --card-foreground: #f8fafc;
+    --popover: #020617;
+    --primary: #f8fafc;
+    --primary-foreground: #0f172a;
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
+    --secondary-vibrant: #8a8a8a;
+    --muted: #1e293b50;
+    --muted-foreground: #94a3b8;
+    --accent: #1e293b;
+    --accent-foreground: #f8fafc;
+    --destructive: #7f1d1d;
+    --destructive-foreground: #f8fafc;
+    --border: #334155;
+    --input: #334155;
+    --ring: #cbd5e1;
+    --chart-1: #e11d48;
+    --chart-2: #14b8a6;
+    --chart-3: #0369a1;
+    --chart-4: #f59e0b;
+    --chart-5: #f97316;
+    --sidebar-background: #0532a1;
+    --sidebar-foreground: #334155;
+    --sidebar-primary: #3b82f6;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #1e293b;
+    --sidebar-accent-foreground: #f8fafc;
+    --sidebar-border: #334155;
+    --sidebar-ring: #cbd5e1;
+
+    /* User specific colors */
+    --brand: #d60053;
+    --surface-soft: #1c1c1e;
+    --autofill-bg: #000000;
+    --autofill-text: #f8fafc;
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: inherit;
+  }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+
+  /** Hide scrollbar*/
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /** Hide scrollbar for Firefox */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Default scrollbar (light mode) */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* Light gray for light mode */
+    border-radius: 12px;
+  }
+
+  /* Dark mode scrollbar */
+  .dark ::-webkit-scrollbar-thumb {
+    background: #475569; /* Dark gray for dark mode */
+  }
+}
