@@ -55,7 +55,7 @@ export default function Login() {
 
   return (
     <main className='w-[calc(100vw-2rem)] sm:contents'>
-      <Card className='w-full max-w-sm rounded-2xl border border-brand/40 bg-[#0B1020]/95 backdrop-blur-xl p-6 shadow-2xl'>
+      <Card className='w-full max-w-md rounded-2xl border border-brand/40 bg-[#0B1020]/95 backdrop-blur-xl p-6 shadow-2xl'>
         <CardHeader className='space-y-2'>
           <CardTitle className='text-3xl text-white'>Incident Center</CardTitle>
 
