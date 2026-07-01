@@ -1,5 +1,5 @@
-import type { UserDocument } from "@/modules/auth/user.model";
 
+import { UserDocument } from '../../modules/auth/auth.model'
 declare global {
   namespace Express {
     interface Request {
