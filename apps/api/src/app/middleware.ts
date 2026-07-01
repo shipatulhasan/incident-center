@@ -21,7 +21,4 @@ export default function registerMiddlewares(app: Express) {
 
   app.use(morgan("dev"));
 
-  app.use(notFound);
-
-  app.use(globalErrorHandler);
 }

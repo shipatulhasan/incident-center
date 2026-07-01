@@ -19,6 +19,8 @@ import {
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { useAppMutation } from '@/api/useAppMutation'
+import { useNavigate } from 'react-router'
 
 const schema = z.object({
   email: z.email('Enter a valid email'),
@@ -28,8 +30,7 @@ const schema = z.object({
 type LoginForm = z.infer<typeof schema>
 
 export default function Login() {
-  // const { user, login } = useAuth();
-
+  const navigate = useNavigate()
   const form = useForm<LoginForm>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -38,14 +39,18 @@ export default function Login() {
     }
   })
 
-  // if (user) {
-  //   return <Navigate replace to="/" />;
-  // }
+  const login = useAppMutation<TLoginResponse, TLoginPayload>({
+    url: '/auth/login'
+  })
 
   async function onSubmit(values: LoginForm) {
     try {
-      console.log(values)
-      // await login(values.email, values.password);
+      const res = await login.mutateAsync(values)
+      console.log(res)
+
+      localStorage.setItem('token', res.data.token)
+
+      navigate('/')
     } catch (err: any) {
       form.setError('root', {
         message: err.response?.data?.message ?? 'Login failed'

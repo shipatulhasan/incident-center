@@ -1,10 +1,10 @@
 
+import authRoutes from "@/modules/auth/auth.routes";
 
-import AuthModule from "@/modules/auth";
 import { App } from "@/shared/types/app";
 
 const registerRoutes = (app: App) => {
-  AuthModule(app);
+   app.use("/api/auth", authRoutes);
 
   // IncidentModule(app);
   // NotificationModule(app);
