@@ -93,9 +93,9 @@ export default function IncidentColumn({
         </p>
       </CardHeader>
 
-      <CardContent className="space-y-4 p-4">
+      <CardContent className="flex flex-col gap-4 p-4">
         {incidents.length === 0 && (
-          <div className="flex min-h-[180px] flex-col items-center justify-center rounded-xl border border-dashed text-center">
+          <div className="flex min-h-45 flex-col items-center justify-center rounded-xl border border-dashed text-center">
             <Inbox className="mb-4 size-10 text-muted-foreground" />
 
             <p className="font-medium">
