@@ -29,6 +29,7 @@ interface IncidentColumnProps {
   status: string;
   hint: string;
   incidents: any[];
+  onDropIncident:(id:string,status:any)=>Promise<void>
 }
 
 interface IncidentCardProps {
@@ -55,16 +56,16 @@ export default function IncidentColumn({
   hint,
   status,
   incidents,
+  onDropIncident
 }: IncidentColumnProps) {
-  function handleDrop(
+ async function handleDrop(
     e: React.DragEvent<HTMLDivElement>,
   ) {
     e.preventDefault();
 
     const id = e.dataTransfer.getData("id");
-
-    console.log(id, status);
-
+    
+    await onDropIncident(id, status);
     /**
      * call mutation here
      */
@@ -74,7 +75,7 @@ export default function IncidentColumn({
     <Card
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleDrop}
-      className="min-h-[650px] border-border/60"
+      className="min-h-67.5 border-border/60"
     >
       <CardHeader className="border-b pb-4">
         <div className="flex items-center justify-between">
