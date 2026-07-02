@@ -5,6 +5,7 @@ import { App } from "@/shared/types/app";
 
 const registerRoutes = (app: App) => {
    app.use("/api/auth", authRoutes);
+   app.use("/api/incident", authRoutes);
 
   // IncidentModule(app);
   // NotificationModule(app);

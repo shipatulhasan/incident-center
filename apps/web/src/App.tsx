@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router'
 import Login from './pages/auth/Login'
 import AuthLayout from './layouts/AuthLayout'
 import DashboardLayout from './layouts/DashboardLaout'
+import Dashboard from './pages/dashborad/Dashboard'
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       </Route>
 
       <Route element={<DashboardLayout />}>
-      <Route path='/' element={<div>Hello</div>} />
-        {/* <Route index element={<Dashboard />} /> */}
+      
+        <Route index element={<Dashboard />} />
         {/* <Route path="incidents" element={<Incidents />} />
         <Route path="team" element={<Team />} />
         <Route path="settings" element={<Settings />} /> */}

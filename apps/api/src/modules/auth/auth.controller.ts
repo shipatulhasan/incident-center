@@ -4,7 +4,7 @@ import catchAsync from "@/shared/middleware/catchAsync";
 
 
 import * as AuthService from "./auth.service";
-import sendResponse from "@/shared/sendResponse";
+import sendResponse from "@/shared/types/sendResponse";
 
 export const login = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.login(req.body);
