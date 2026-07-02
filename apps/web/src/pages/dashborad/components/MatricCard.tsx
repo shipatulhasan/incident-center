@@ -24,16 +24,7 @@ export default function MetricCard({
 
   return (
     <Card
-      className='transition-all border-border/40
-group
-border-border/40
-bg-card
-shadow-md
-
-duration-300
-hover:-translate-y-1
-hover:shadow-2xl
-hover:border-primary'>
+      className='glass-panel group ring-0 transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-2xl hover:shadow-primary/10'>
       <CardContent className='p-6'>
         <div className='flex items-start justify-between'>
           <div className='space-y-2'>
@@ -47,7 +38,7 @@ hover:border-primary'>
           </div>
 
           {icon && (
-            <div className='rounded-xl border bg-primary/10 p-3 text-primary'>
+            <div className='rounded-xl border border-primary/15 bg-primary/10 p-3 text-primary shadow-inner shadow-white/20 backdrop-blur-md'>
               {icon}
             </div>
           )}

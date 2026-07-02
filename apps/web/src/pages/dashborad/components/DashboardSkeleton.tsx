@@ -5,8 +5,8 @@ export default function DashboardSkeleton() {
     <section className="space-y-8">
       {/* Search */}
       <div className="flex gap-4">
-        <Skeleton className="h-11 flex-1" />
-        <Skeleton className="h-11 w-44" />
+        <Skeleton className="h-11 flex-1 bg-slate-200" />
+        <Skeleton className="h-11 w-44 bg-slate-200" />
       </div>
 
       {/* Metrics */}
@@ -14,7 +14,7 @@ export default function DashboardSkeleton() {
         {Array.from({ length: 4 }).map((_, i) => (
           <Skeleton
             key={i}
-            className="h-36 rounded-xl"
+            className="h-36 rounded-xl bg-slate-200"
           />
         ))}
       </div>
@@ -26,12 +26,12 @@ export default function DashboardSkeleton() {
             key={column}
             className="space-y-4 rounded-xl border p-5"
           >
-            <Skeleton className="h-6 w-36" />
+            <Skeleton className="h-6 w-36 bg-slate-200" />
 
             {Array.from({ length: 3 }).map((_, card) => (
               <Skeleton
                 key={card}
-                className="h-40 rounded-xl"
+                className="h-40 rounded-xl bg-slate-200"
               />
             ))}
           </div>

@@ -112,6 +112,80 @@
   - app-input-autofill-dark: always dark (auth login inputs)
 */
 @layer components {
+  .dashboard-shell {
+    background:
+      radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--ring) 24%, transparent) 0, transparent 34rem),
+      radial-gradient(circle at 86% 2%, color-mix(in srgb, var(--accent) 18%, transparent) 0, transparent 32rem),
+      linear-gradient(135deg, color-mix(in srgb, var(--background) 94%, white 6%), var(--background) 42%, color-mix(in srgb, var(--background) 88%, var(--primary) 12%));
+  }
+
+  .dashboard-grid {
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--ring) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--ring) 10%, transparent) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: linear-gradient(to bottom, black 0%, black 58%, transparent 100%);
+  }
+
+  .glass-panel {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--card) 84%, white 16%), color-mix(in srgb, var(--card) 68%, transparent)),
+      color-mix(in srgb, var(--card) 72%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
+      0 18px 50px color-mix(in srgb, var(--primary) 12%, transparent);
+    backdrop-filter: blur(18px) saturate(150%);
+  }
+
+  .glass-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(110deg, color-mix(in srgb, white 35%, transparent), transparent 34%),
+      radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--ring) 18%, transparent), transparent 32%);
+    opacity: 0.65;
+  }
+
+  .glass-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .glass-panel-strong {
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--card) 92%, white 8%), color-mix(in srgb, var(--card) 82%, transparent)),
+      color-mix(in srgb, var(--card) 86%, transparent);
+  }
+
+  .glass-control {
+    border-color: color-mix(in srgb, var(--foreground) 14%, transparent);
+    background-color: color-mix(in srgb, var(--card) 82%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 45%, transparent),
+      0 10px 28px color-mix(in srgb, var(--primary) 9%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+
+  .dark .glass-panel {
+    border-color: color-mix(in srgb, white 16%, transparent);
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--card) 76%, white 8%), color-mix(in srgb, var(--card) 64%, transparent)),
+      color-mix(in srgb, var(--card) 74%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, white 14%, transparent),
+      0 18px 60px rgb(0 0 0 / 0.35);
+  }
+
+  .dark .glass-control {
+    border-color: color-mix(in srgb, white 16%, transparent);
+    background-color: color-mix(in srgb, var(--card) 74%, transparent);
+  }
+
   .app-input-autofill:-webkit-autofill,
   .app-input-autofill:-webkit-autofill:hover,
   .app-input-autofill:-webkit-autofill:focus,

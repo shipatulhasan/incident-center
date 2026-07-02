@@ -11,8 +11,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-import DashboardHeader from './components/DashboardHeader'
-
 // import CreateIncidentDialog from "./components/CreateIncidentDialog";
 import MetricCard from './components/MatricCard'
 import IncidentColumn from './components/IncidentColumn'
@@ -41,7 +39,7 @@ const columns = [
 
 export default function Dashboard() {
   const [query, setQuery] = useState('')
-  const [open, setOpen] = useState(false)
+  const [, setOpen] = useState(false)
   const { data: incidentsData, isPending: incidentsLoading } = useAppQuery<
     TApiResponse<Record<string, any>[]>
   >({
@@ -55,7 +53,7 @@ export default function Dashboard() {
     url: '/incidents/stats'
   })
 
-  const { data: usersData, isPending: usersLoading } = useAppQuery<
+  const { isPending: usersLoading } = useAppQuery<
     TApiResponse<{
       users: TIUser[]
     }>
@@ -77,7 +75,7 @@ const updateStatus = useAppMutation<
   id: string,
   status: any,
 ) => {
-  const updateResult = await updateStatus.mutateAsync({
+  await updateStatus.mutateAsync({
     url: `/incidents/${id}`,
     data: {
       status,
@@ -117,8 +115,6 @@ const updateStatus = useAppMutation<
    */
 
   const incidents: Record<string, any>[] = incidentsData?.data!
-  const users: Record<string, any>[] = usersData?.data.users!
-
   const stats: Record<string, any> = statsData?.data!
 
 
@@ -170,19 +166,22 @@ const updateStatus = useAppMutation<
     <section className='space-y-8'>
       {/* <DashboardHeader /> */}
 
-      <div className='flex flex-col gap-4 lg:flex-row'>
+      <div className='glass-panel glass-panel-strong rounded-md flex flex-col gap-4 p-4 ring-0 lg:flex-row'>
         <div className='relative flex-1'>
           <Search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
 
           <Input
-            className='pl-10 h-11'
+            className='glass-control h-11 border border-slate-300 pl-10'
             placeholder='Search incident, service or severity...'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
 
-        <Button size='lg' onClick={() => setOpen(true)}>
+        <Button
+          size='lg'
+          onClick={() => setOpen(true)}
+          className='border border-primary/20 shadow-lg shadow-primary/10'>
           <Plus className='mr-2 size-4' />
           Create Incident
         </Button>

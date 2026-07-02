@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(
     async (payload: TLoginPayload) => {
-      const res = await loginMutation.mutateAsync(payload)
+      const res = await loginMutation.mutateAsync({ data: payload })
 
       authStorage.setToken(res.data.token)
       console.log(res)
