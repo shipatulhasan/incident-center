@@ -31,13 +31,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const {
     data,
     isPending: loading,
-  } = useAppQuery<{
+  } = useAppQuery<TApiResponse<{
     user: TIUser
-  }>({
+  }>>({
     queryKey: ['me'],
     url: '/auth/me',
     enabled: !!token
   })
+  
 
   const loginMutation = useAppMutation<TLoginResponse, TLoginPayload>({
     url: '/auth/login'
@@ -48,10 +49,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await loginMutation.mutateAsync(payload)
 
       authStorage.setToken(res.data.token)
+      console.log(res)
 
-      queryClient.setQueryData(['me'], {
-        user: res.data.user
-      })
+      queryClient.setQueryData<TApiResponse<{ user: TIUser }>>(
+  ["me"],
+  {
+    success: true,
+    message: "",
+    data: {
+      user: res.data.user,
+    },
+  }
+);
       return res.data;
     },
     [loginMutation, queryClient]
@@ -60,14 +69,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(() => {
     authStorage.removeToken();
 
-    window.location.href = '/login'
+    window.location.href = '/auth/login'
   }, [])
 
   const value = useMemo(
     () => ({
-      user: data?.user ?? null,
+      user: data?.data?.user ?? null,
       loading,
-      isAuthenticated: !!data?.user,
+      isAuthenticated: !!data?.data?.user,
       login,
       logout,
       loginLoading: loginMutation.isPending,

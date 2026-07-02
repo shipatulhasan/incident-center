@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Outlet, useLocation } from 'react-router';
-import star from '../../assets/images/authStar.png';
-import star2 from '../../assets/images/authStar2.png';
+import star from '../assets/images/authStar.png';
+import star2 from '../assets/images/authStar2.png';
 
 const AuthLayout = () => {
     const location = useLocation()

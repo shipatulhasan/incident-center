@@ -18,6 +18,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const me = catchAsync(async (req: Request, res: Response) => {
+  
   const result = await AuthService.me(req.user);
 
   sendResponse(res, {

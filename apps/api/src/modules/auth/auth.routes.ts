@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import * as AuthController from "./auth.controller";
+import auth from "@/shared/middleware/auth";
 
 // import auth from "@/shared/middleware/auth";
 
@@ -15,7 +16,7 @@ router.post(
 
 router.get(
   "/me",
-  // auth(),
+  auth(),
   AuthController.me,
 );
 

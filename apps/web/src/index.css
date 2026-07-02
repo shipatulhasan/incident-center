@@ -144,7 +144,6 @@
 @layer base {
   :root {
     --background: #ffffff;
-    --foreground: #020617;
     --card: #ffffff;
     --card-foreground: #020617;
     --popover: #3db6cd1a;
@@ -211,7 +210,7 @@
     --secondary-vibrant: #8a8a8a;
     --muted: #1e293b50;
     --muted-foreground: #94a3b8;
-    --accent: #1e293b;
+    --accent: #ff2d8d;
     --accent-foreground: #f8fafc;
     --destructive: #7f1d1d;
     --destructive-foreground: #f8fafc;
@@ -249,6 +248,17 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: inherit;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   button,

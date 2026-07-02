@@ -137,7 +137,7 @@ export default function Login() {
           <Button
             form='login-form'
             type='submit'
-            className='h-11 w-full bg-accent uppercase font-semibold tracking-wide hover:bg-accent/90'
+            className='h-11 w-full bg-accent text-white uppercase font-semibold tracking-wide hover:bg-accent/90'
             disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting ? 'Signing in...' : 'Sign In'}
           </Button>
