@@ -8,6 +8,7 @@ import api from "./axios";
 interface QueryProps {
   queryKey: QueryKey;
   url: string;
+  enabled?:boolean
 }
 
 export function useAppQuery<T>({

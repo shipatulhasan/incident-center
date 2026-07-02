@@ -18,8 +18,8 @@ import {
   FieldLabel
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
-import { useAppMutation } from '@/api/useAppMutation'
 import { useNavigate } from 'react-router'
 
 const schema = z.object({
@@ -31,6 +31,7 @@ type LoginForm = z.infer<typeof schema>
 
 export default function Login() {
   const navigate = useNavigate()
+  const { login } = useAuth();
   const form = useForm<LoginForm>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -39,16 +40,10 @@ export default function Login() {
     }
   })
 
-  const login = useAppMutation<TLoginResponse, TLoginPayload>({
-    url: '/auth/login'
-  })
 
   async function onSubmit(values: LoginForm) {
     try {
-      const res = await login.mutateAsync(values)
-      console.log(res)
-
-      localStorage.setItem('token', res.data.token)
+      await login(values)
 
       navigate('/')
     } catch (err: any) {
