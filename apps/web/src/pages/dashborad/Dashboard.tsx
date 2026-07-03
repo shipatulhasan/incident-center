@@ -166,12 +166,12 @@ const updateStatus = useAppMutation<
     <section className='space-y-8'>
       {/* <DashboardHeader /> */}
 
-      <div className='glass-panel glass-panel-strong rounded-md flex flex-col gap-4 p-4 ring-0 lg:flex-row'>
+      <div className=' rounded-md flex flex-col gap-4 p-4 ring-0 lg:flex-row'>
         <div className='relative flex-1'>
           <Search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
 
           <Input
-            className='glass-control h-11 border border-slate-300 pl-10'
+            className='glass-control h-11 border border-slate-300 pl-10 focus-visible:ring-0 focus-visible:ring-offset-0'
             placeholder='Search incident, service or severity...'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
