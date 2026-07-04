@@ -1,4 +1,3 @@
-import { NavLink, Outlet } from "react-router";
 import {
   Bell,
   LayoutDashboard,
@@ -6,13 +5,13 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
+import { NavLink, Outlet } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
-import { useAuth } from "@/context/AuthContext";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 
 
