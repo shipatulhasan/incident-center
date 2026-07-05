@@ -43,7 +43,7 @@ jobs:
           APP_DIR: ${{ secrets.APP_DIR }}
         run: |
           set -euo pipefail
-          "APP_DIR"="${APP_DIR:-/opt/incident-center}" 
+          APP_DIR="${APP_DIR:-/opt/incident-center}" 
           ssh -i ~/.ssh/incident.pem "$EC2_USER@$EC2_HOST" \
           "bash -s -- '$APP_DIR'"  < scripts/ec2-bootstrap.sh
 
