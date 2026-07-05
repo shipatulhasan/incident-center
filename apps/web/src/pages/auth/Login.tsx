@@ -31,7 +31,7 @@ type LoginForm = z.infer<typeof schema>
 
 export default function Login() {
   const navigate = useNavigate()
-  const { login } = useAuth();
+  const { login } = useAuth()
   const form = useForm<LoginForm>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -39,7 +39,6 @@ export default function Login() {
       password: 'hello123'
     }
   })
-
 
   async function onSubmit(values: LoginForm) {
     try {
@@ -54,17 +53,9 @@ export default function Login() {
   }
 
   return (
-    <main className='w-[calc(100vw-2rem)] sm:contents'>
-      <Card className='w-full max-w-md rounded-2xl border border-brand/40 bg-[#0B1020]/95 backdrop-blur-xl p-6 shadow-2xl'>
-        <CardHeader className='space-y-2'>
-          <CardTitle className='text-3xl text-white'>Incident Center</CardTitle>
-
-          <CardDescription>
-            Sign in to access the incident center.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className='border-0'>
+    <main>
+      <Card className='w-full max-w-md rounded-2xl bg-transparent border-0 ring-0 shadow-2xl space-y-0 backdrop-blur-2xl'>
+        <CardContent>
           <form
             id='login-form'
             onSubmit={form.handleSubmit(onSubmit)}
@@ -132,15 +123,30 @@ export default function Login() {
             </FieldGroup>
           </form>
         </CardContent>
-
-        <CardFooter className='flex-col items-stretch gap-4 border-0 bg-transparent'>
+        <CardFooter className='border-0 bg-transparent flex-col pt-0'>
           <Button
             form='login-form'
             type='submit'
-            className='h-11 w-full bg-accent text-white uppercase font-semibold tracking-wide hover:bg-accent/90'
+            className='h-11 w-full bg-accent text-white uppercase font-semibold tracking-wide hover:bg-accent/90 cursor-pointer'
             disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting ? 'Signing in...' : 'Sign In'}
           </Button>
+        </CardFooter>
+      </Card>
+      {/* <Card className='w-full max-w-md rounded-2xl '>
+        <CardHeader className='space-y-2'>
+          <CardTitle className='text-3xl text-white'>Incident Center</CardTitle>
+
+          <CardDescription>
+            Sign in to access the incident center.
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className='border-0'>
+       
+        </CardContent>
+
+        <CardFooter className='flex-col items-stretch gap-4 border-0 bg-transparent'>
 
           <p className='text-sm text-slate-400'>
             Demo account
@@ -150,7 +156,7 @@ export default function Login() {
             hello123
           </p>
         </CardFooter>
-      </Card>
+      </Card> */}
     </main>
   )
 }
