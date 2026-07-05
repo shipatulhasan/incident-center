@@ -23,7 +23,7 @@ echo "Installing node.js ..."
 
 if ! command -v node > /dev/null 2>&1 || ! node -v | grep -q "^v${NODE_MAJOR}"; then
   curl -fsSL https://deb.nodesource.com/setup_${NODE_MAJOR}.x | sudo -E bash -
-  sudo apt-install -y nodejs
+  sudo apt install -y nodejs
 fi
 
 echo "Installing pm2"
