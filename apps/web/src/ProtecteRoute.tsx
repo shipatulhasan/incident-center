@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router";
-import { useAuth } from "./context/AuthContext";
 import AppLoader from "./components/ui/app-loader";
+import { useAuth } from "./context/AuthContext";
 
 
 function ProtectedRoute() {
