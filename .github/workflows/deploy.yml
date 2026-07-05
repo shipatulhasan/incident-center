@@ -55,7 +55,7 @@ jobs:
 
         run: |
           set -euo pipefail
-          APP_DIR= "${APP_DIR:-/opt/incident-center}"
+          APP_DIR="${APP_DIR:-/opt/incident-center}"
           rsync -az --delete \
           --exclude '.git' \
           --exclude ".github" \
