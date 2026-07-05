@@ -114,17 +114,42 @@
 @layer components {
   .dashboard-shell {
     background:
-      radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--ring) 24%, transparent) 0, transparent 34rem),
-      radial-gradient(circle at 86% 2%, color-mix(in srgb, var(--accent) 18%, transparent) 0, transparent 32rem),
-      linear-gradient(135deg, color-mix(in srgb, var(--background) 94%, white 6%), var(--background) 42%, color-mix(in srgb, var(--background) 88%, var(--primary) 12%));
+      radial-gradient(
+        circle at 12% 0%,
+        color-mix(in srgb, var(--ring) 24%, transparent) 0,
+        transparent 34rem
+      ),
+      radial-gradient(
+        circle at 86% 2%,
+        color-mix(in srgb, var(--accent) 18%, transparent) 0,
+        transparent 32rem
+      ),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--background) 94%, white 6%),
+        var(--background) 42%,
+        color-mix(in srgb, var(--background) 88%, var(--primary) 12%)
+      );
   }
 
   .dashboard-grid {
     background-image:
-      linear-gradient(color-mix(in srgb, var(--ring) 10%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in srgb, var(--ring) 10%, transparent) 1px, transparent 1px);
+      linear-gradient(
+        color-mix(in srgb, var(--ring) 10%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--ring) 10%, transparent) 1px,
+        transparent 1px
+      );
     background-size: 36px 36px;
-    mask-image: linear-gradient(to bottom, black 0%, black 58%, transparent 100%);
+    mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 58%,
+      transparent 100%
+    );
   }
 
   .glass-panel {
@@ -132,7 +157,11 @@
     overflow: hidden;
     border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
     background:
-      linear-gradient(135deg, color-mix(in srgb, var(--card) 84%, white 16%), color-mix(in srgb, var(--card) 68%, transparent)),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--card) 84%, white 16%),
+        color-mix(in srgb, var(--card) 68%, transparent)
+      ),
       color-mix(in srgb, var(--card) 72%, transparent);
     box-shadow:
       inset 0 1px 0 color-mix(in srgb, white 55%, transparent),
@@ -141,13 +170,21 @@
   }
 
   .glass-panel::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-      linear-gradient(110deg, color-mix(in srgb, white 35%, transparent), transparent 34%),
-      radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--ring) 18%, transparent), transparent 32%);
+      linear-gradient(
+        110deg,
+        color-mix(in srgb, white 35%, transparent),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 18% 0%,
+        color-mix(in srgb, var(--ring) 18%, transparent),
+        transparent 32%
+      );
     opacity: 0.65;
   }
 
@@ -158,7 +195,11 @@
 
   .glass-panel-strong {
     background:
-      linear-gradient(135deg, color-mix(in srgb, var(--card) 92%, white 8%), color-mix(in srgb, var(--card) 82%, transparent)),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--card) 92%, white 8%),
+        color-mix(in srgb, var(--card) 82%, transparent)
+      ),
       color-mix(in srgb, var(--card) 86%, transparent);
   }
 
@@ -174,7 +215,11 @@
   .dark .glass-panel {
     border-color: color-mix(in srgb, white 16%, transparent);
     background:
-      linear-gradient(135deg, color-mix(in srgb, var(--card) 76%, white 8%), color-mix(in srgb, var(--card) 64%, transparent)),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--card) 76%, white 8%),
+        color-mix(in srgb, var(--card) 64%, transparent)
+      ),
       color-mix(in srgb, var(--card) 74%, transparent);
     box-shadow:
       inset 0 1px 0 color-mix(in srgb, white 14%, transparent),
@@ -212,6 +257,16 @@
     -webkit-box-shadow: inset 0 0 0 1000px #020617 !important;
     box-shadow: inset 0 0 0 1000px #020617 !important;
     transition: background-color 9999s ease-in-out 0s !important;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-120%);
+    }
+
+    100% {
+      transform: translateX(220%);
+    }
   }
 }
 
