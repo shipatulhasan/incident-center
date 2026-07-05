@@ -66,7 +66,7 @@ export default function Login() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Email</FieldLabel>
+                    <FieldLabel className='text-primary'>Email</FieldLabel>
 
                     <Input
                       {...field}
@@ -93,7 +93,7 @@ export default function Login() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel>Password</FieldLabel>
+                    <FieldLabel className='text-primary'>Password</FieldLabel>
 
                     <Input
                       {...field}
