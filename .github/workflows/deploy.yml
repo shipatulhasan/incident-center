@@ -2,7 +2,11 @@ name: Deploy incident-center apllication
 on:
   push:
     branches: ['main']
-  workspace_dispatch:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: Deploy on machine
