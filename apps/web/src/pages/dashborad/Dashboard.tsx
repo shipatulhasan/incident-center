@@ -65,7 +65,7 @@ export default function Dashboard() {
   const queryClient = useQueryClient();
 
 const updateStatus = useAppMutation<
-  TApiResponse<{ incident: TIncident }>,
+  TApiResponse<{ incident: IUpdateIncidentPayload }>,
   { status: any }
   >({
    
@@ -84,7 +84,7 @@ const updateStatus = useAppMutation<
 
  queryClient.setQueryData(
   ["incidents"],
-  (old: TApiResponse<TIncident & {_id:string}[]> | undefined) => {
+  (old: TApiResponse<TIncident[]> | undefined) => {
     if (!old) return old;
 
     return {

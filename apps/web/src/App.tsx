@@ -3,6 +3,7 @@ import AuthLayout from './layouts/AuthLayout'
 import DashboardLayout from './layouts/DashboardLaout'
 import Login from './pages/auth/Login'
 import Dashboard from './pages/dashborad/Dashboard'
+import IncidentDetails from './pages/IncidentDetails/Incidentdetails'
 import ProtectedRoute from './ProtecteRoute'
 
 function App() {
@@ -18,12 +19,13 @@ function App() {
       <Route element={<DashboardLayout />}>
       
         <Route index element={<Dashboard />} />
+        <Route path='/incidents/:id' element={<IncidentDetails />} />
         {/* <Route path="incidents" element={<Incidents />} />
         <Route path="team" element={<Team />} />
         <Route path="settings" element={<Settings />} /> */}
       </Route>
       </Route>
-
+ 
     </Routes>
   )
 }
