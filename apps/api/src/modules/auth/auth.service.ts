@@ -65,14 +65,7 @@ export async function listUsers() {
 
 export async function deleteUser(
   id: string,
-  currentUser: UserDocument,
 ) {
-  if (String(currentUser._id) === id) {
-    throw new AppError(
-      400,
-      "You cannot delete your own account while logged in.",
-    );
-  }
 
   const user = await User.findById(id);
 

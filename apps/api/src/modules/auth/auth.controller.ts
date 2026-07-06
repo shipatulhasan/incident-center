@@ -53,8 +53,7 @@ export const listUsers = catchAsync(async (_req: Request, res: Response) => {
 
 export const deleteUser = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.deleteUser(
-    req.params.id as string,
-    req.user,
+    req.params.id as string
   );
 
   sendResponse(res, {

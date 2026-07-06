@@ -308,7 +308,7 @@ const IncidentDetails = () => {
 
                 <SelectContent>
                   {users.map((u) => (
-                    <SelectItem key={u._id} value={u._id}>
+                    <SelectItem key={u.id} value={u.id}>
                       {u.name}
                     </SelectItem>
                   ))}

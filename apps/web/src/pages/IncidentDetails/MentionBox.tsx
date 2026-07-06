@@ -179,7 +179,7 @@ export default function MentionCommentBox({ users, onSubmit }: Props) {
             {matches.length ? (
               matches.map((user, index) => (
                 <button
-                  key={user._id}
+                  key={user.id}
                   type='button'
                   onMouseDown={(e) => {
                     e.preventDefault()

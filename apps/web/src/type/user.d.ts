@@ -1,5 +1,5 @@
 interface TIUser {
-  _id: string;
+  id: string;
   name: string;
   email: string;
   role:  'admin' | 'engineer';

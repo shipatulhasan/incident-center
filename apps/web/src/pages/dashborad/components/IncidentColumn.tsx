@@ -9,6 +9,7 @@ import { Clock3, Server, UserRound } from 'lucide-react'
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { getAvatarColor, getInitials } from '@/lib/avatar'
+import AppAvatar from '@/components/shared/AppAvatar'
 
 interface IncidentColumnProps {
   title: string
@@ -136,19 +137,8 @@ function IncidentCard({ incident }: IncidentCardProps) {
 
           <div className='flex items-center justify-between border-t border-white/25 pt-4 dark:border-white/10'>
             <div className='flex items-center gap-3'>
-              <Avatar className='size-8'>
-                <AvatarFallback
-                  className={cn(
-                    'font-semibold',
-                    getAvatarColor(incident.assignedTo?.name)
-                  )}>
-                  {incident.assignedTo?.name ? (
-                    getInitials(incident.assignedTo.name)
-                  ) : (
-                    <UserRound className='size-4' />
-                  )}
-                </AvatarFallback>
-              </Avatar>
+              <AppAvatar user={incident.assignedTo?.name}/>
+            
 
               <div className='flex flex-col'>
                 <span className='text-xs text-muted-foreground'>Assigned</span>
