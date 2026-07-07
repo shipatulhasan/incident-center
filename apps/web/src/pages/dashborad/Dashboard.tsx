@@ -18,6 +18,7 @@ import { useAppQuery } from '@/api/useAppQuery'
 import DashboardSkeleton from './components/DashboardSkeleton'
 import { useQueryClient } from '@tanstack/react-query'
 import { useAppMutation } from '@/api/useAppMutation'
+import IncidentForm from './components/IncidentForm'
 
 const columns = [
   {
@@ -39,9 +40,9 @@ const columns = [
 
 export default function Dashboard() {
   const [query, setQuery] = useState('')
-  const [, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false)
   const { data: incidentsData, isPending: incidentsLoading } = useAppQuery<
-    TApiResponse<Record<string, any>[]>
+    TApiResponse<TIncident[]>
   >({
     queryKey: ['incidents'],
     url: '/incidents'
@@ -53,7 +54,7 @@ export default function Dashboard() {
     url: '/incidents/stats'
   })
 
-  const { isPending: usersLoading } = useAppQuery<
+  const {data:userData, isPending: usersLoading } = useAppQuery<
     TApiResponse<{
       users: TIUser[]
     }>
@@ -113,9 +114,10 @@ const updateStatus = useAppMutation<
   /**
    * Replace with TanStack Query
    */
-
+console.log(incidentsData?.data)
   const incidents: Record<string, any>[] = incidentsData?.data!
   const stats: Record<string, any> = statsData?.data!
+  const users: TIUser[] = userData?.data?.users!
 
 
   const metrics = [
@@ -212,11 +214,11 @@ const updateStatus = useAppMutation<
         ))}
       </div>
 
-      {/* <CreateIncidentDialog
-        open={open}
-        onOpenChange={setOpen}
+      <IncidentForm
+        open={isOpen}
+        onClose={()=>setOpen(false)}
         users={users}
-      /> */}
+      />
     </section>
   )
 }
