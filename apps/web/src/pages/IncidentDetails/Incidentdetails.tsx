@@ -216,7 +216,7 @@ const IncidentDetails = () => {
             </div>
 
             <div className='flex gap-3'>
-              <Button onClick={() => setEditing(true)}>Edit Incident</Button>
+              <Button onClick={() => setEditing(true)} className={'cursor-pointer'}>Edit Incident</Button>
               {editing && (
                 <IncidentForm
                   open={editing}
@@ -228,7 +228,9 @@ const IncidentDetails = () => {
 
               {user?.role === 'admin' && (
                 <Button
-                  variant='destructive'
+                  // variant='destructive'
+                  className={'bg-accent text-primary cursor-pointer hover:bg-accent/60'}
+                  
                   onClick={() => setDeleteConfirmOpen(true)}>
                   Delete
                 </Button>
