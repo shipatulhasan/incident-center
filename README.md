@@ -23,7 +23,7 @@ Incident Center is a full-stack incident management dashboard for tracking servi
 
 ### Incident Details
 
-![Incident Details](docs/incident-details.png)
+![Incident Details](docs/incident_details.png)
 
 ### Team Management
 
