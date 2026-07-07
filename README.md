@@ -13,12 +13,21 @@ Incident Center is a full-stack incident management dashboard for tracking servi
 
 > Add application screenshots here.
 
-```text
-docs/login.png
-docs/dashboard.png
-docs/incident-details.png
-docs/team.png
-```
+### Login
+
+![Login](docs/login.png)
+
+### Dashboard
+
+![Dashboard](docs/dashboard.png)
+
+### Incident Details
+
+![Incident Details](docs/incident-details.png)
+
+### Team Management
+
+![Team](docs/team.png)
 
 ## Features
 
