@@ -116,7 +116,7 @@ size-5
 items-center
 justify-center
 rounded-full
-bg-destructive
+bg-accent
 text-[10px]
 font-bold
 text-white

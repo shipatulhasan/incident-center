@@ -202,7 +202,7 @@ export default function Team() {
                     {user?.role === 'admin' && user?.id !== u.id && (
                       <Button
                         size='icon'
-                        variant='destructive'
+                        className={'bg-accent/20 text-accent'}
                         onClick={() => setPendingDeleteUser(u)}>
                         <Trash2 size={16} />
                       </Button>

@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const {
     data,
-    isPending: loading,
+    isPending,
   } = useAppQuery<TApiResponse<{
     user: TIUser
   }>>({
@@ -38,6 +38,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     url: '/auth/me',
     enabled: !!token
   })
+
+   /**
+   * Important:
+   * Disabled query stays pending forever
+   */
+  const loading = token ? isPending : false;
   
 
   const loginMutation = useAppMutation<TLoginResponse, TLoginPayload>({

@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <AuthProvider>
          <RouterProvider router={router} />
-            <Toaster richColors />
+          <Toaster richColors />
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
