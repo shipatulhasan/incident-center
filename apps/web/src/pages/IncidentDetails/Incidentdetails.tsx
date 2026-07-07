@@ -14,7 +14,6 @@ import AppLoader from '@/components/ui/app-loader'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
   Select,
@@ -26,11 +25,11 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { useAuth } from '@/context/AuthContext'
 import { useQueryClient } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import MentionCommentBox from './MentionBox'
 import { toast } from 'sonner'
 import IncidentForm from '../dashborad/components/IncidentForm'
+import MentionCommentBox from './MentionBox'
 
 const IncidentDetails = () => {
   const { id } = useParams()

@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 type Props = {

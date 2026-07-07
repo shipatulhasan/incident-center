@@ -1,14 +1,12 @@
-import { Inbox } from 'lucide-react'
-import { Link } from 'react-router'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { Inbox } from 'lucide-react'
+import { Link } from 'react-router'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import { Clock3, Server, UserRound } from 'lucide-react'
+import { Clock3, Server } from 'lucide-react'
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { getAvatarColor, getInitials } from '@/lib/avatar'
 import AppAvatar from '@/components/shared/AppAvatar'
 
 interface IncidentColumnProps {

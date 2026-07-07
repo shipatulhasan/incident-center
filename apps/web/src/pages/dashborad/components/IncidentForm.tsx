@@ -1,8 +1,8 @@
-import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from 'sonner'
 import { useQueryClient } from '@tanstack/react-query'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -27,9 +27,9 @@ import {
   FieldLabel
 } from '@/components/ui/field'
 
-import { Textarea } from '@/components/ui/textarea'
 import { useAppMutation } from '@/api/useAppMutation'
 import AppInput from '@/components/shared/AppInput'
+import { Textarea } from '@/components/ui/textarea'
 
 const schema = z.object({
   title: z.string().min(1, 'Title required'),

@@ -1,5 +1,5 @@
 import { Bell, LayoutDashboard, LogOut, ShieldCheck, Users } from 'lucide-react'
-import { NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router'
+import { NavLink, Outlet, useLocation } from 'react-router'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
