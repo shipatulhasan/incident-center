@@ -2,21 +2,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import AppInput from '@/components/shared/AppInput'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardFooter
-} from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import {
   Field,
   FieldError,
-  FieldGroup,
-  FieldLabel
+  FieldGroup
 } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
 import { useAuth } from '@/context/AuthContext'
-import { cn } from '@/lib/utils'
 import { useNavigate } from 'react-router'
 
 const schema = z.object({
@@ -62,26 +56,14 @@ export default function Login() {
                 name='email'
                 control={form.control}
                 render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel className='text-primary'>Email</FieldLabel>
-
-                    <Input
-                      {...field}
-                      placeholder='admin@company.com'
-                      autoComplete='email'
-                      className={cn(
-                        'app-input-autofill-dark bg-[#020617] text-white h-11 focus-visible:ring-1 border-gray-700 mt-1',
-                        fieldState.error
-                          ? 'border-red-500 focus-visible:ring-red-500 pr-9'
-                          : 'focus-visible:ring-brand'
-                      )}
-                      aria-invalid={fieldState.invalid}
-                    />
-
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
+                  <AppInput
+                    label='Email'
+                    field={field}
+                    fieldState={fieldState}
+                    placeholder='admin@company.com'
+                    autoComplete='email'
+                    aria-invalid={fieldState.invalid}
+                  />
                 )}
               />
 
@@ -89,26 +71,15 @@ export default function Login() {
                 name='password'
                 control={form.control}
                 render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel className='text-primary'>Password</FieldLabel>
-
-                    <Input
-                      {...field}
-                      type='password'
-                      autoComplete='current-password'
-                      className={cn(
-                        'app-input-autofill-dark bg-[#020617] text-white h-11 focus-visible:ring-1 border-gray-700 mt-1',
-                        fieldState.error
-                          ? 'border-red-500 focus-visible:ring-red-500 pr-9'
-                          : 'focus-visible:ring-brand'
-                      )}
-                      aria-invalid={fieldState.invalid}
-                    />
-
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
+                  <AppInput
+                    label='Password'
+                    field={field}
+                    fieldState={fieldState}
+                    placeholder='...........'
+                    type='password'
+                    autoComplete='current-password'
+                    aria-invalid={fieldState.invalid}
+                  />
                 )}
               />
 
@@ -130,30 +101,7 @@ export default function Login() {
           </Button>
         </CardFooter>
       </Card>
-      {/* <Card className='w-full max-w-md rounded-2xl '>
-        <CardHeader className='space-y-2'>
-          <CardTitle className='text-3xl text-white'>Incident Center</CardTitle>
-
-          <CardDescription>
-            Sign in to access the incident center.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className='border-0'>
-       
-        </CardContent>
-
-        <CardFooter className='flex-col items-stretch gap-4 border-0 bg-transparent'>
-
-          <p className='text-sm text-slate-400'>
-            Demo account
-            <br />
-            admin@auto-reliability.com
-            <br />
-            hello123
-          </p>
-        </CardFooter>
-      </Card> */}
+      
     </main>
   )
 }

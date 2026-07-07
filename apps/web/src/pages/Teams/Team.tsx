@@ -1,20 +1,7 @@
-import { useState } from 'react'
-import { Trash2, UserPlus, ShieldCheck, UserRound } from 'lucide-react'
-import { toast } from 'sonner'
-import { useQueryClient } from '@tanstack/react-query'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { useAppMutation } from '@/api/useAppMutation'
+import { useAppQuery } from '@/api/useAppQuery'
+import AppAvatar from '@/components/shared/AppAvatar'
+import AppInput from '@/components/shared/AppInput'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,12 +12,47 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from '@/components/ui/alert-dialog'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel
+} from '@/components/ui/field'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { useAuth } from '@/context/AuthContext'
-import { useAppQuery } from '@/api/useAppQuery'
-import { useAppMutation } from '@/api/useAppMutation'
-import { cn } from '@/lib/utils'
-import { getAvatarColor, getInitials } from '@/lib/avatar'
-import AppAvatar from '@/components/shared/AppAvatar'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
+import { ShieldCheck, Trash2, UserPlus } from 'lucide-react'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import * as z from 'zod'
+
+const addUserSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+
+  email: z.string().email('Invalid email'),
+
+  password: z.string().min(6, 'Minimum 6 characters'),
+
+  role: z.enum(['engineer', 'admin']),
+
+  team: z.string(),
+
+  isOnCall: z.boolean()
+})
+
+type AddUserForm = z.infer<typeof addUserSchema>
 
 export default function Team() {
   const { user } = useAuth()
@@ -39,13 +61,17 @@ export default function Team() {
 
   const [pendingDeleteUser, setPendingDeleteUser] = useState<any>(null)
 
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: 'hello123',
-    role: 'engineer',
-    team: 'Reliability',
-    isOnCall: false
+  const form = useForm<AddUserForm>({
+    resolver: zodResolver(addUserSchema),
+
+    defaultValues: {
+      name: '',
+      email: '',
+      password: 'hello123',
+      role: 'engineer',
+      team: 'Reliability',
+      isOnCall: false
+    }
   })
 
   /**
@@ -57,7 +83,9 @@ export default function Team() {
     url: '/auth/users'
   })
 
-  const users = (data?.data.users ?? [])?.filter((u:TIUser)=>u.id!=user?.id)
+  const users = (data?.data.users ?? [])?.filter(
+    (u: TIUser) => u.id != user?.id
+  )
 
   /**
    * mutations
@@ -71,29 +99,34 @@ export default function Team() {
     method: 'delete'
   })
 
-  async function submit(e: React.FormEvent) {
-    e.preventDefault()
-
+  async function onSubmit(values: AddUserForm) {
     try {
       await createUser.mutateAsync({
         url: '/auth/users',
-        data: form
+        data: values
       })
 
       toast.success('Engineer added', {
         description: 'User added to reliability team'
       })
 
-      setForm({
-        ...form,
+      form.reset({
         name: '',
-        email: ''
+        email: '',
+        password: 'hello123',
+        role: 'engineer',
+        team: 'Reliability',
+        isOnCall: false
       })
 
       queryClient.invalidateQueries({
         queryKey: ['users']
       })
     } catch (err: any) {
+      form.setError('root', {
+        message: err.response?.data?.message || 'Only admin can add users'
+      })
+
       toast.error(err.response?.data?.message || 'Only admin can add users')
     }
   }
@@ -148,8 +181,7 @@ export default function Team() {
                   p-4
                   '>
                   <div className='flex items-center gap-3'>
-                    <AppAvatar user={u.name}/>
-             
+                    <AppAvatar user={u.name} />
 
                     <div>
                       <h3 className='font-semibold'>{u.name}</h3>
@@ -195,88 +227,125 @@ export default function Team() {
               Current role: {user?.role}
             </p>
 
-            <Input
-              placeholder='Name'
-              value={form.name}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  name: e.target.value
-                })
-              }
-            />
+            <form id='add-user-form' onSubmit={form.handleSubmit(onSubmit)}>
+              <FieldGroup>
+                <Controller
+                  name='name'
+                  control={form.control}
+                  render={({ field, fieldState }) => (
+                    <AppInput
+                      label='Name'
+                      field={field}
+                      fieldState={fieldState}
+                      placeholder='John Doe'
+                    />
+                  )}
+                />
 
-            <Input
-              placeholder='Email'
-              value={form.email}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  email: e.target.value
-                })
-              }
-            />
+                <Controller
+                  name='email'
+                  control={form.control}
+                  render={({ field, fieldState }) => (
+                    <AppInput
+                      label='Email'
+                      field={field}
+                      fieldState={fieldState}
+                      placeholder='engineer@company.com'
+                    />
+                  )}
+                />
 
-            <Input
-              placeholder='Password'
-              value={form.password}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  password: e.target.value
-                })
-              }
-            />
+                <Controller
+                  name='password'
+                  control={form.control}
+                  render={({ field, fieldState }) => (
+                    <AppInput
+                      label='Password'
+                      field={field}
+                      fieldState={fieldState}
+                      type='password'
+                      placeholder='********'
+                    />
+                  )}
+                />
 
-            <div className='grid grid-cols-2 gap-4'>
-              <Select
-                value={form.role}
-                onValueChange={(v) =>
-                  setForm({
-                    ...form,
-                    role: v!
-                  })
-                }>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
+                <div className='grid grid-cols-2 gap-4'>
+                  <Controller
+                    name='role'
+                    control={form.control}
+                    render={({ field, fieldState }) => (
+                      <Field>
+                        <FieldLabel>Role</FieldLabel>
 
-                <SelectContent>
-                  <SelectItem value='engineer'>Engineer</SelectItem>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}>
+                          <SelectTrigger
+                            aria-invalid={fieldState.invalid}
+                            className='w-full'>
+                            <SelectValue placeholder='Select role' />
+                          </SelectTrigger>
 
-                  <SelectItem value='admin'>Admin</SelectItem>
-                </SelectContent>
-              </Select>
+                          <SelectContent>
+                            <SelectItem value='engineer'>Engineer</SelectItem>
 
-              <Input
-                value={form.team}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    team: e.target.value
-                  })
-                }
-              />
-            </div>
+                            <SelectItem value='admin'>Admin</SelectItem>
+                          </SelectContent>
+                        </Select>
 
-            <div className='flex items-center gap-3'>
-              <Checkbox
-                checked={form.isOnCall}
-                onCheckedChange={(v) =>
-                  setForm({
-                    ...form,
-                    isOnCall: Boolean(v)
-                  })
-                }
-              />
+                        {fieldState.error && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </Field>
+                    )}
+                  />
 
-              <span className='text-sm'>On-call now</span>
-            </div>
+                  <Controller
+                    name='team'
+                    control={form.control}
+                    render={({ field, fieldState }) => (
+                      <AppInput
+                        label='Team'
+                        field={field}
+                        fieldState={fieldState}
+                      />
+                    )}
+                  />
+                </div>
 
-            <Button className='w-full' onClick={submit}>
-              Add User
-            </Button>
+                <Controller
+                  name='isOnCall'
+                  control={form.control}
+                  render={({ field }) => (
+                    <div className='flex items-center gap-3'>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+
+                      <span className='text-sm'>On-call now</span>
+                    </div>
+                  )}
+                />
+
+                {form.formState.errors.root && (
+                  <Field>
+                    <FieldError errors={[form.formState.errors.root]} />
+                  </Field>
+                )}
+              </FieldGroup>
+            </form>
           </CardContent>
+
+          <CardFooter className='border-0 bg-transparent pt-0'>
+            <Button
+              form='add-user-form'
+              type='submit'
+              className='h-11 w-full bg-accent text-white uppercase font-semibold tracking-wide hover:bg-accent/90 cursor-pointer'
+              disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? 'Adding...' : 'Add User'}
+            </Button>
+          </CardFooter>
         </Card>
       </div>
 
