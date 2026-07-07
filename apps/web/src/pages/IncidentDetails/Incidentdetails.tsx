@@ -184,7 +184,7 @@ const IncidentDetails = () => {
 
       {/* Hero */}
 
-      <Card className='glass-panel glass-panel-strong overflow-hidden'>
+      <Card className='glass-panel glass-panel-strong overflow-hidden ring-0'>
         <CardContent className='p-8'>
           <div className='flex flex-col gap-6 md:flex-row md:items-start md:justify-between'>
             <div className='space-y-4'>
@@ -245,7 +245,7 @@ const IncidentDetails = () => {
       <div className='grid gap-6 lg:grid-cols-2'>
         {/* Controls */}
 
-        <Card className='glass-panel'>
+        <Card className='glass-panel ring-0' >
           <CardContent className='space-y-6 p-6'>
             <h2 className='text-xl font-bold'>Incident Controls</h2>
 
@@ -307,7 +307,7 @@ const IncidentDetails = () => {
 
         {/* Postmortem */}
 
-        <Card className='glass-panel'>
+        <Card className='glass-panel ring-0' >
           <CardContent className='space-y-5 p-6'>
             <h2 className='text-xl font-bold'>Postmortem</h2>
 
@@ -358,7 +358,7 @@ const IncidentDetails = () => {
         </Card>
       </div>
 
-      <Card className='glass-panel'>
+      <Card className='glass-panel ring-0'>
         <CardContent className='space-y-6 p-6'>
           <div className='flex items-center justify-between'>
             <h2 className='text-xl font-bold'>Timeline</h2>
@@ -430,7 +430,7 @@ const IncidentDetails = () => {
       </Card>
 
       <AlertDialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent className={'bg-slate-500/10 ring-brand backdrop-blur-2xl'}>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Incident?</AlertDialogTitle>
 
@@ -439,12 +439,12 @@ const IncidentDetails = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
 
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogFooter className='bg-brand/10 ring-0 border-0'>
+            <AlertDialogCancel  className={'cursor-pointer bg-accent text-white hover:bg-accent/90'}>Cancel</AlertDialogCancel>
 
             <AlertDialogAction
               onClick={deleteIncident}
-              className='bg-destructive'>
+              className={'border border-brand/50 bg-brand/10 text-accent cursor-pointer hover:bg-accent/60'}>
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
