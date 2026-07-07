@@ -78,7 +78,7 @@ export default function Team() {
    * users
    */
 
-  const { data, isPending } = useAppQuery<any>({
+  const { data } = useAppQuery<any>({
     queryKey: ['users'],
     url: '/auth/users'
   })

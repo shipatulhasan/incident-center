@@ -78,7 +78,7 @@ export default function IncidentForm({ open, onClose, users, initial }: Props) {
   })
 
   const saveIncident = useAppMutation<
-    TApiResponse<TIncident[]>,
+    TApiResponse<TIncident>,
     IncidentFormValues
   >({
     method: initial?._id ? 'patch' : 'post'
@@ -96,18 +96,33 @@ export default function IncidentForm({ open, onClose, users, initial }: Props) {
         description: 'Reliability board updated successfully'
       })
 
-      queryClient.setQueryData(
-        ['incidents'],
-        (old: TApiResponse<TIncident[]> | undefined) => {
+      if (initial?._id) {
+        // update existing
+        queryClient.setQueryData(
+          ['incident', result.data._id],
+          (old: TApiResponse<TIncident> | undefined) => {
+            if (!old) return old
 
-          if (!old) return old
-
-          return {
-            ...old,
-            data: [result.data, ...old.data]
+            return {
+              ...old,
+              data: result.data
+            }
           }
-        }
-      )
+        )
+      } else {
+        // add new immediately
+        queryClient.setQueryData(
+          ['incidents'],
+          (old: TApiResponse<TIncident[]> | undefined) => {
+            if (!old) return old
+
+            return {
+              ...old,
+              data: [result.data, ...old.data]
+            }
+          }
+        )
+      }
 
       queryClient.invalidateQueries({
         queryKey: ['incident-stats']
@@ -126,7 +141,6 @@ export default function IncidentForm({ open, onClose, users, initial }: Props) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        
         className='
           glass-panel
           sm:p-6
@@ -152,63 +166,62 @@ export default function IncidentForm({ open, onClose, users, initial }: Props) {
         <form id='incident-form' onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-5'>
-
-            <Controller
-              name='title'
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <AppInput
-                  label='Title'
-                  field={field}
-                  fieldState={fieldState}
-                  placeholder='Database outage'
-                />
-              )}
-            />
-
-            <Controller
-              name='service'
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <AppInput
-                  label='Service'
-                  field={field}
-                  fieldState={fieldState}
-                  placeholder='payment-api'
-                />
-              )}
-            />
-
-            <Controller
-              name='description'
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field>
-                  <FieldLabel>Description</FieldLabel>
-
-                  <Textarea {...field} placeholder='What happened?' />
-
-                  {fieldState.error && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
-
-            <Controller
-              name='impact'
-              control={form.control}
-              render={({ field }) => (
-                <Field>
-                  <FieldLabel>Impact</FieldLabel>
-
-                  <Textarea
-                    {...field}
-                    placeholder='Affected customers, downtime...'
+              <Controller
+                name='title'
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <AppInput
+                    label='Title'
+                    field={field}
+                    fieldState={fieldState}
+                    placeholder='Database outage'
                   />
-                </Field>
-              )}
-            />
+                )}
+              />
+
+              <Controller
+                name='service'
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <AppInput
+                    label='Service'
+                    field={field}
+                    fieldState={fieldState}
+                    placeholder='payment-api'
+                  />
+                )}
+              />
+
+              <Controller
+                name='description'
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel>Description</FieldLabel>
+
+                    <Textarea {...field} placeholder='What happened?' />
+
+                    {fieldState.error && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              <Controller
+                name='impact'
+                control={form.control}
+                render={({ field }) => (
+                  <Field>
+                    <FieldLabel>Impact</FieldLabel>
+
+                    <Textarea
+                      {...field}
+                      placeholder='Affected customers, downtime...'
+                    />
+                  </Field>
+                )}
+              />
             </div>
 
             <div className='grid grid-cols-2 gap-4'>
@@ -247,7 +260,7 @@ export default function IncidentForm({ open, onClose, users, initial }: Props) {
                   <Field>
                     <FieldLabel>Assign Engineer</FieldLabel>
 
-                    <Select value={field.value} onValueChange={field.onChange} >
+                    <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger>
                         <SelectValue placeholder='Unassigned' />
                       </SelectTrigger>

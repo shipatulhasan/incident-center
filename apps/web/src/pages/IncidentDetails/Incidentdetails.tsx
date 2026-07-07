@@ -30,6 +30,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import MentionCommentBox from './MentionBox'
 import { toast } from 'sonner'
+import IncidentForm from '../dashborad/components/IncidentForm'
 
 const IncidentDetails = () => {
   const { id } = useParams()
@@ -43,21 +44,9 @@ const IncidentDetails = () => {
    * Local states
    */
 
-  const [comment, setComment] = useState('')
-
   const [editing, setEditing] = useState(false)
 
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
-
-  const [mentionState, setMentionState] = useState({
-    open: false,
-    query: '',
-    start: -1,
-    end: -1,
-    activeIndex: 0
-  })
-
-  const commentInputRef = useRef<HTMLInputElement>(null)
 
   const [post, setPost] = useState({
     rootCause: '',
@@ -146,30 +135,6 @@ const IncidentDetails = () => {
     })
   }
 
-  async function addComment(e: React.FormEvent) {
-    e.preventDefault()
-
-    if (!comment.trim()) return
-
-    await commentMutation.mutateAsync({
-      url: `/incidents/${id}/comments`,
-      data: {
-        message: comment
-      }
-    })
-
-    setComment('')
-
-    setMentionState((p) => ({
-      ...p,
-      open: false
-    }))
-
-    queryClient.invalidateQueries({
-      queryKey: ['incident', id]
-    })
-  }
-
   async function deleteIncident() {
     await deleteMutation.mutateAsync({
       url: `/incidents/${id}`
@@ -210,7 +175,6 @@ const IncidentDetails = () => {
 
   if (isPending) return <AppLoader />
 
-  console.log(incident)
   if (!incident) return null
   return (
     <section className='space-y-8'>
@@ -254,6 +218,14 @@ const IncidentDetails = () => {
 
             <div className='flex gap-3'>
               <Button onClick={() => setEditing(true)}>Edit Incident</Button>
+              {editing && (
+                <IncidentForm
+                  open={editing}
+                  onClose={() => setEditing(false)}
+                  users={users}
+                  initial={incident}
+                />
+              )}
 
               {user?.role === 'admin' && (
                 <Button
@@ -398,31 +370,29 @@ const IncidentDetails = () => {
 
           <MentionCommentBox
             users={users}
-         onSubmit={async (message) => {
-    try {
-      await commentMutation.mutateAsync({
-        url: `/incidents/${id}/comments`,
-        data: {
-          message,
-        },
-      });
+            onSubmit={async (message) => {
+              try {
+                await commentMutation.mutateAsync({
+                  url: `/incidents/${id}/comments`,
+                  data: {
+                    message
+                  }
+                })
 
-      queryClient.invalidateQueries({
-        queryKey: ["incident", id],
-      });
+                queryClient.invalidateQueries({
+                  queryKey: ['incident', id]
+                })
 
-      toast.success("Comment added", {
-        description:
-          "Timeline updated successfully. Mentioned users will be notified.",
-      });
-
-    } catch (error) {
-      toast.error("Failed to add comment", {
-        description:
-          "Please try again later.",
-      });
-    }
-  }}
+                toast.success('Comment added', {
+                  description:
+                    'Timeline updated successfully. Mentioned users will be notified.'
+                })
+              } catch (error) {
+                toast.error('Failed to add comment', {
+                  description: 'Please try again later.'
+                })
+              }
+            }}
           />
 
           <div className='space-y-4'>
