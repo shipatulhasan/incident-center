@@ -1,4 +1,4 @@
-import { Bell, LayoutDashboard, LogOut, ShieldCheck, Users } from 'lucide-react'
+import { LayoutDashboard, LogOut, ShieldCheck, Users } from 'lucide-react'
 import { NavLink, Outlet, useLocation } from 'react-router'
 
 import { Button } from '@/components/ui/button'
@@ -7,8 +7,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
-import { useEffect, useRef } from 'react'
 import Notifications from '@/pages/dashborad/components/Notification'
+import { useEffect, useRef } from 'react'
 
 export default function DashboardLayout() {
   const { user, logout } = useAuth()
