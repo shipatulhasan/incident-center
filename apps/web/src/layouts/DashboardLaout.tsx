@@ -8,6 +8,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
 import { useEffect, useRef } from 'react'
+import Notifications from '@/pages/dashborad/components/Notification'
 
 export default function DashboardLayout() {
   const { user, logout } = useAuth()
@@ -15,18 +16,14 @@ export default function DashboardLayout() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-
     // don't scroll dashboard page
-    if (pathname === "/") return;
-
+    if (pathname === '/') return
 
     ref.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-
-
-  }, [pathname]);
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }, [pathname])
 
   return (
     <div className=' relative min-h-screen overflow-hidden bg-background'>
@@ -142,7 +139,9 @@ export default function DashboardLayout() {
             </CardContent>
           </Card>
 
-          <div ref={ref} className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
+          <div
+            ref={ref}
+            className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
             <div className='flex items-center gap-2 text-sm'>
               <ShieldCheck className='size-4 text-primary' />
 
@@ -151,16 +150,12 @@ export default function DashboardLayout() {
               <span className='font-semibold'>{user?.name}</span>
             </div>
 
-            <Button variant='outline' size='icon' className='glass-control'>
-              <Bell className='size-5' />
-            </Button>
+            <Notifications />
           </div>
 
           {/* <Separator className="bg-border/60" /> */}
 
-          
-            <Outlet />
-          
+          <Outlet />
         </main>
       </div>
     </div>

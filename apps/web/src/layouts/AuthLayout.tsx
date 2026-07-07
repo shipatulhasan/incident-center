@@ -2,19 +2,6 @@ import { ShieldCheck } from 'lucide-react'
 import { Outlet } from 'react-router'
 
 const AuthLayout = () => {
-  // const location = useLocation()
-  // const page = location.pathname
-  // const glowHeight = page.includes('/login')
-  //   ? 'sm:h-[75vh]'
-  //   : page.includes('/signup')
-  //     ? 'sm:h-[90vh]'
-  //     : page.includes('/reset-password') ||
-  //         page.includes('/forgot-password') ||
-  //         page.includes('/invite')
-  //       ? 'sm:h-[75vh]'
-  //       : page.includes('/verify-email')
-  //         ? 'sm:h-[75vh]'
-  //         : 'sm:h-[40vh]'
   return (
     <div className='relative min-h-screen overflow-hidden bg-background text-foreground'>
       {/* ================= Background ================= */}
