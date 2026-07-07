@@ -79,7 +79,7 @@ export default function DashboardLayout() {
                     <Button
                       variant={isActive ? 'default' : 'outline'}
                       className={cn(
-                        'glass-control gap-2 transition-all hover:bg-brand hover:text-white',
+                        'glass-control gap-2 transition-all hover:bg-brand hover:text-white cursor-pointer',
                         isActive &&
                           'border-brand/40 bg-brand text-white shadow-lg shadow-brand/20'
                       )}>
@@ -94,7 +94,7 @@ export default function DashboardLayout() {
                     <Button
                       variant={isActive ? 'default' : 'outline'}
                       className={cn(
-                        'glass-control gap-2 transition-all hover:bg-brand hover:text-white',
+                        'glass-control gap-2 transition-all hover:bg-brand hover:text-white cursor-pointer',
                         isActive &&
                           'border-brand/40 bg-brand text-white shadow-lg shadow-brand/20'
                       )}>
@@ -107,7 +107,7 @@ export default function DashboardLayout() {
                 <Button
                   variant='outline'
                   onClick={logout}
-                  className='glass-control gap-2 hover:bg-brand hover:text-white'>
+                  className='glass-control gap-2 hover:bg-brand hover:text-white cursor-pointer'>
                   <LogOut className='size-4' />
                   Logout
                 </Button>

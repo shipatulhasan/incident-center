@@ -10,6 +10,7 @@ export function ThemeToggle() {
     <Button
       size="icon"
       variant="outline"
+      className='glass-control gap-2 hover:bg-brand hover:text-white cursor-pointer'
       onClick={() =>
         setTheme(theme === "dark" ? "light" : "dark")
       }

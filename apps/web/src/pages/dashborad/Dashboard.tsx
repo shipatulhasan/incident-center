@@ -168,7 +168,7 @@ console.log(incidentsData?.data)
     <section className='space-y-8'>
       {/* <DashboardHeader /> */}
 
-      <div className=' rounded-md flex flex-col gap-4 p-4 ring-0 lg:flex-row'>
+      <div className=' rounded-md flex flex-col gap-4 p-4 ring-0 lg:flex-row items-center'>
         <div className='relative flex-1'>
           <Search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
 
@@ -183,7 +183,7 @@ console.log(incidentsData?.data)
         <Button
           size='lg'
           onClick={() => setOpen(true)}
-          className='border border-primary/20 shadow-lg shadow-primary/10'>
+          className='bg-accent text-white shadow-lg shadow-primary/10 cursor-pointer hover:bg-accent/90'>
           <Plus className='mr-2 size-4' />
           Create Incident
         </Button>

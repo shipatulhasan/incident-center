@@ -216,7 +216,7 @@ const IncidentDetails = () => {
             </div>
 
             <div className='flex gap-3'>
-              <Button onClick={() => setEditing(true)} className={'cursor-pointer'}>Edit Incident</Button>
+              <Button onClick={() => setEditing(true)} className={'cursor-pointer bg-accent text-white hover:bg-accent/90'}>Edit Incident</Button>
               {editing && (
                 <IncidentForm
                   open={editing}
@@ -229,7 +229,7 @@ const IncidentDetails = () => {
               {user?.role === 'admin' && (
                 <Button
                   // variant='destructive'
-                  className={'bg-accent text-primary cursor-pointer hover:bg-accent/60'}
+                  className={'border border-brand/50 bg-brand/10 text-accent cursor-pointer hover:bg-accent/60'}
                   
                   onClick={() => setDeleteConfirmOpen(true)}>
                   Delete
@@ -345,7 +345,7 @@ const IncidentDetails = () => {
             />
 
             <div className='flex gap-3'>
-              <Button onClick={savePostmortem}>Save Postmortem</Button>
+              <Button onClick={savePostmortem} className={'cursor-pointer bg-accent text-white hover:bg-accent/90'} >Save Postmortem</Button>
 
               {/* <Button
                 variant='outline'

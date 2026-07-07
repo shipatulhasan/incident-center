@@ -102,7 +102,7 @@ export default function Notifications() {
         <Button
           variant='outline'
           size='icon'
-          className='glass-control relative'>
+          className='glass-control relative cursor-pointer hover:bg-inherit'>
           <Bell className='size-5' />
 
           {unread > 0 && (
@@ -116,7 +116,7 @@ size-5
 items-center
 justify-center
 rounded-full
-bg-accent
+bg-brand
 text-[10px]
 font-bold
 text-white

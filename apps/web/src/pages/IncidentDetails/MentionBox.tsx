@@ -232,7 +232,7 @@ export default function MentionCommentBox({ users, onSubmit }: Props) {
         )}
       </div>
 
-      <Button type='submit'>Send</Button>
+      <Button type='submit' className={'cursor-pointer bg-accent text-white hover:bg-accent/90'}>Send</Button>
     </form>
   )
 }
